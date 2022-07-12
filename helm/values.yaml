@@ -1,0 +1,34 @@
+fullnameOverride: kube-janitor
+nameOverride: kube-janitor
+
+imagePullSecrets:
+  - name: registry
+
+image:
+  repository: registry.vptimmy.ddns.net/dockerhub-proxy/hjacobs/kube-janitor
+  pullPolicy: IfNotPresent
+
+
+kubejanitor:
+  dryRun: false
+  debug: false
+  
+  rules:
+    - id: require-application-label
+      resources:
+        - jobs
+        - pods
+
+      jmespath: "starts_with(metadata.name, 'google-ddns-integration-')"
+      ttl: 30m
+
+
+restartPolicy: OnFailure
+
+resources:
+  limits:
+    memory: 100Mi
+  requests:
+    cpu: 5m
+    memory: 100Mi
+

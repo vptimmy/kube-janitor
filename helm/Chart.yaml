@@ -1,0 +1,20 @@
+apiVersion: v2
+
+name: kube-janitor
+description: Clean up (delete) Kubernetes resources after a configured TTL (time to live)
+
+type: application
+
+keywords:
+    - ohio
+    - application
+    - custom
+
+home: https://github.ohio.edu/OIT/mw-kube-janitor-3rdparty-app
+
+maintainers:
+  - name: Tim Hibbard
+    email: vptimmy@gmail.com
+
+version: 0.1.1
+appVersion: "20.4.1"

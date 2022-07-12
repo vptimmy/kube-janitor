@@ -1,0 +1,23 @@
+
+apiVersion: skaffold/v2beta25
+kind: Config
+
+deploy:
+  helm:
+    releases:
+      - name: kube-janitor
+        chartPath: helm
+        valuesFiles:
+          - helm/values.yaml
+        
+        upgradeOnChange: true
+
+        createNamespace: true
+        namespace: kube-janitor
+
+profiles:
+  - name: dryrun
+    patches:
+      - op: replace
+        path: /deploy/helm/releases/0/valuesFiles/0
+        value: helm/values/dryrun.yaml
